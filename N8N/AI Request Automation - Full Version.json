@@ -1,0 +1,352 @@
+{
+  "name": "AI Request Automation - Full Version",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-request-intake",
+        "options": {}
+      },
+      "id": "1b690d59-d0c5-4f22-b94d-7d824a5b8be3",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1008,
+        160
+      ],
+      "webhookId": "bd967b4c-9ac9-4c1b-8eb0-a04fe05337d9"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "request_text",
+              "value": "={{$json[\"body\"][\"message\"] || $json[\"message\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "867cd7c3-c301-42b4-a367-377e4023c70f",
+      "name": "Extract Request",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -752,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "chat",
+        "requestOptions": {}
+      },
+      "id": "4b0ffac8-9f7f-44ed-aeed-d89d6ef7179f",
+      "name": "LLM Classification",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const data = JSON.parse(items[0].json.message.content);\nreturn [{ json: data }];"
+      },
+      "id": "fd38c3b4-6cc0-4121-8732-1e1cdba8d8c9",
+      "name": "Parse LLM Output",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "embeddings",
+        "requestOptions": {}
+      },
+      "id": "74126013-84a5-459b-b436-4a8525c06a4d",
+      "name": "Generate Embedding",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "return [{ json: { rag_context: 'Relevant knowledge retrieved for ' + $json.category } }];"
+      },
+      "id": "4d6ea3eb-1bc4-4b57-b488-baad4ed7eba8",
+      "name": "Simulated RAG Retrieval",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        256,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json[\"confidence\"]}}",
+              "value2": 0.7
+            }
+          ]
+        }
+      },
+      "id": "98256dfc-987a-4cde-a2ff-3b5f60f733f7",
+      "name": "Check Confidence",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        0,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "human-review",
+        "text": "Low confidence request detected.",
+        "otherOptions": {},
+        "attachments": []
+      },
+      "id": "30ba630b-01c8-408f-895b-313044fb1209",
+      "name": "Slack Human Review",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        256,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "channel": "auto-routing",
+        "text": "={{'New ' + $json.category + ' request routed with priority ' + $json.priority}}",
+        "otherOptions": {},
+        "attachments": []
+      },
+      "id": "da4d95a6-70b7-4220-ae53-8c5712a531a1",
+      "name": "Slack Auto Routing",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [
+        256,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "YOUR_GOOGLE_SHEET_ID",
+        "range": "Sheet1!A:D",
+        "options": {}
+      },
+      "id": "51bc4335-4e7e-4499-beb4-2c9c138b5805",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [
+        512,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        688,
+        304
+      ],
+      "id": "da4985a0-2a39-469e-8bd4-551959bd69e4",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "content": "## Intelligent AI Workflow Automation for Operational Request Processing\n\nThis workflow automatically receives incoming service requests, uses AI to classify and prioritise them, routes high-confidence cases directly to the correct team, and escalates uncertain cases to human review. It also logs structured data for performance tracking and monitoring.",
+        "height": 208,
+        "width": 512,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1056,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "d8ce473b-3e32-4b0a-a567-5ff7754c7760",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Why?\n\nIt reduces manual triage time, improves routing accuracy, and creates structured operational data for KPI analysis. The goal is to make request handling scalable, data-driven, and less dependent on human intervention.",
+        "height": 208,
+        "width": 448,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -528,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "e6705a04-760a-4bd3-abf1-02da900d47f4",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Important\nThe Red warning triangles are just because credentials are not set up as this is just a template. You would enter your own credentials when using this workflow.",
+        "width": 336,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        384
+      ],
+      "typeVersion": 1,
+      "id": "1df90656-4b1a-4496-bfab-519140e20d51",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Extract Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Request": {
+      "main": [
+        [
+          {
+            "node": "LLM Classification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Classification": {
+      "main": [
+        [
+          {
+            "node": "Parse LLM Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse LLM Output": {
+      "main": [
+        [
+          {
+            "node": "Check Confidence",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate Embedding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Embedding": {
+      "main": [
+        [
+          {
+            "node": "Simulated RAG Retrieval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Confidence": {
+      "main": [
+        [
+          {
+            "node": "Slack Human Review",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack Auto Routing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Auto Routing": {
+      "main": [
+        [
+          {
+            "node": "Log to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Human Review": {
+      "main": [
+        [
+          {
+            "node": "Log to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "6f68be08-fff2-4b51-9741-9a2a503d2f94",
+  "meta": {
+    "instanceId": "c45e13033831b9d1c58e49bc945275d8a5f43c77fc19222f6b2077646d765b9d"
+  },
+  "id": "pBL6EukUNl34PqY9",
+  "tags": []
+}
