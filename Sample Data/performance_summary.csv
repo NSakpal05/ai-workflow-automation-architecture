@@ -1,0 +1,9 @@
+metric,value
+Average Triage Time (Manual),4.5 minutes
+Average Triage Time (Automated),0.4 minutes
+Auto Routing Rate (%),82%
+Escalation Rate (%),18%
+Misrouting Rate Before (%),18%
+Misrouting Rate After (%),5%
+Total Requests Processed (30 Days),"1,250"
+Average Confidence Score,0.87

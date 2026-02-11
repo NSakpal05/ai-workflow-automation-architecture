@@ -1,0 +1,51 @@
+request_id,timestamp,raw_message,category,priority,confidence,routing_status
+REQ001,2026-02-01 09:15,The app freezes after update.,Technical,Medium,0.86,Auto Routed
+REQ002,2026-02-01 09:30,The dashboard crashes when exporting reports.,Technical,Medium,0.94,Auto Routed
+REQ003,2026-02-01 09:45,How do I upgrade my account?,General,Low,0.52,Escalated
+REQ004,2026-02-01 10:00,Login page is not loading properly.,Technical,Medium,0.79,Auto Routed
+REQ005,2026-02-01 10:15,I have contacted support multiple times with no response.,Complaint,High,0.93,Auto Routed
+REQ006,2026-02-01 10:30,Please refund the duplicate payment.,Billing,High,0.89,Auto Routed
+REQ007,2026-02-01 10:45,Please refund the duplicate payment.,Billing,High,0.92,Auto Routed
+REQ008,2026-02-01 11:00,I have contacted support multiple times with no response.,Complaint,High,0.79,Auto Routed
+REQ009,2026-02-01 11:15,The dashboard crashes when exporting reports.,Technical,Medium,0.93,Auto Routed
+REQ010,2026-02-01 11:30,I have contacted support multiple times with no response.,Complaint,High,0.81,Auto Routed
+REQ011,2026-02-01 11:45,Why was I billed after cancelling?,Billing,High,0.67,Escalated
+REQ012,2026-02-01 12:00,Please refund the duplicate payment.,Billing,High,0.88,Auto Routed
+REQ013,2026-02-01 12:15,Where can I find documentation?,General,Low,0.76,Auto Routed
+REQ014,2026-02-01 12:30,Login page is not loading properly.,Technical,Medium,0.55,Escalated
+REQ015,2026-02-01 12:45,This service is unacceptable.,Complaint,High,0.8,Auto Routed
+REQ016,2026-02-01 13:00,System error appears when submitting form.,Technical,Medium,0.84,Auto Routed
+REQ017,2026-02-01 13:15,Can you share your enterprise pricing plans?,General,Low,0.92,Auto Routed
+REQ018,2026-02-01 13:30,I was charged twice for my subscription.,Billing,High,0.91,Auto Routed
+REQ019,2026-02-01 13:45,Login page is not loading properly.,Technical,Medium,0.58,Escalated
+REQ020,2026-02-01 14:00,I am very dissatisfied with the response time.,Complaint,High,0.54,Escalated
+REQ021,2026-02-01 14:15,My invoice amount seems incorrect.,Billing,High,0.92,Auto Routed
+REQ022,2026-02-01 14:30,Do you offer student discounts?,General,Low,0.56,Escalated
+REQ023,2026-02-01 14:45,Why was I billed after cancelling?,Billing,High,0.75,Auto Routed
+REQ024,2026-02-01 15:00,The app freezes after update.,Technical,Medium,0.82,Auto Routed
+REQ025,2026-02-01 15:15,The app freezes after update.,Technical,Medium,0.76,Auto Routed
+REQ026,2026-02-01 15:30,The dashboard crashes when exporting reports.,Technical,Medium,0.89,Auto Routed
+REQ027,2026-02-01 15:45,Your team has ignored my issue.,Complaint,High,0.59,Escalated
+REQ028,2026-02-01 16:00,How do I upgrade my account?,General,Low,0.94,Auto Routed
+REQ029,2026-02-01 16:15,System error appears when submitting form.,Technical,Medium,0.91,Auto Routed
+REQ030,2026-02-01 16:30,How do I upgrade my account?,General,Low,0.9,Auto Routed
+REQ031,2026-02-01 16:45,Please refund the duplicate payment.,Billing,High,0.78,Auto Routed
+REQ032,2026-02-01 17:00,Login page is not loading properly.,Technical,Medium,0.63,Escalated
+REQ033,2026-02-01 17:15,My invoice amount seems incorrect.,Billing,High,0.6,Escalated
+REQ034,2026-02-01 17:30,Login page is not loading properly.,Technical,Medium,0.91,Auto Routed
+REQ035,2026-02-01 17:45,Where can I find documentation?,General,Low,0.93,Auto Routed
+REQ036,2026-02-01 18:00,Can you share your enterprise pricing plans?,General,Low,0.84,Auto Routed
+REQ037,2026-02-01 18:15,Do you offer student discounts?,General,Low,0.77,Auto Routed
+REQ038,2026-02-01 18:30,Your team has ignored my issue.,Complaint,High,0.79,Auto Routed
+REQ039,2026-02-01 18:45,Your team has ignored my issue.,Complaint,High,0.88,Auto Routed
+REQ040,2026-02-01 19:00,The dashboard crashes when exporting reports.,Technical,Medium,0.52,Escalated
+REQ041,2026-02-01 19:15,My invoice amount seems incorrect.,Billing,High,0.83,Auto Routed
+REQ042,2026-02-01 19:30,The app freezes after update.,Technical,Medium,0.6,Escalated
+REQ043,2026-02-01 19:45,System error appears when submitting form.,Technical,Medium,0.86,Auto Routed
+REQ044,2026-02-01 20:00,This service is unacceptable.,Complaint,High,0.85,Auto Routed
+REQ045,2026-02-01 20:15,Do you offer student discounts?,General,Low,0.88,Auto Routed
+REQ046,2026-02-01 20:30,System error appears when submitting form.,Technical,Medium,0.79,Auto Routed
+REQ047,2026-02-01 20:45,Where can I find documentation?,General,Low,0.79,Auto Routed
+REQ048,2026-02-01 21:00,Can you share your enterprise pricing plans?,General,Low,0.69,Escalated
+REQ049,2026-02-01 21:15,I have contacted support multiple times with no response.,Complaint,High,0.78,Auto Routed
+REQ050,2026-02-01 21:30,Please refund the duplicate payment.,Billing,High,0.53,Escalated
